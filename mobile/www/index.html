@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport"
+    content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+  <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+  <!--<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />-->
+  <!--<meta http-equiv="Content-Security-Policy"
+    content="default-src *; style-src 'self' 'unsafe-inline'; media-src *; img-src * 'self' data: https:; script-src 'self' 'unsafe-inline' 'unsafe-eval'" />-->
+  <!-- Good default declaration:
+    * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+    * Disables use of eval() and inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+        * Enable inline JS: add 'unsafe-inline' to default-src
+        * Enable eval(): add 'unsafe-eval' to default-src
+    * Create your own at http://cspisawesome.com
+    -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+  <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
+  <!--<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">-->
+
+
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
+  <link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css" />
+  <link rel="stylesheet" href="css/fontawesome/css/all.min.css" />
+  <link rel="stylesheet" href="tagify/tagify.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.53.1/mapbox-gl.css' rel='stylesheet' />
+  <title>MLS</title>
+</head>
+
+<body>
+
+  <div>
+
+
+
+
+
+
+    <div id="login" class="vertical-center" style="background-image:url(img/login_new.jpg); background-size:cover;">
+
+      <div class="container" style="text-align:center;">
+        <div class="row h-100 justify-content-center">
+
+          <form class="col-10">
+            <img src="img/mls.png" width="80%" style="padding-bottom:80px; padding-top:30px;">
+            <!--<h2 style="padding-bottom:20px; color:#fff;">Welcome!</h2>-->
+            <h5 style="color:#fff; padding-bottom:15px;">LOG IN TO YOUR ACCOUNT</h5>
+            <div class="form-group">
+              <input id="loginUsername" type="text" class="form-control brighter-form" placeholder="Username"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;" value="rjude"
+                required>
+            </div>
+            <div class="form-group">
+              <input id="loginPass" type="password" class="form-control brighter-form" placeholder="Password"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;" value="1234"
+                required>
+            </div>
+            <button id="loginBtn" type="button" class="btn btn-primary btn-block"
+              style="border-radius:50px; height:50px; background-color:#6ed3cf; border:none;">Login</button>
+          </form>
+
+
+        </div>
+        <br />
+        <p id="errorMsg" style="color:red;"></p>
+        <br />
+        <small style="color:#fff;">Don't have an account?</small>
+        <a id="registerTooltipBtn">
+          <p style="font-size:14px; font-weight:bold; color:#6ed3cf">SIGN UP NOW</p>
+        </a>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="register" class="vertical-center hidden"
+      style="background-image:url(img/login_new.jpg); background-size:cover;">
+
+      <div class="container" style="text-align:center;">
+        <div class="row h-100 justify-content-center">
+
+          <form class="col-10">
+            <img src="img/mls.png" width="80%" style="padding-bottom:80px; padding-top:30px;">
+            <!--<h2 style="padding-bottom:20px; color:#fff;">Welcome!</h2>-->
+            <h5 style="color:#fff; padding-bottom:15px;">CREATE AN ACCOUNT</h5>
+            <div class="form-group">
+              <input id="registerUsername1" type="text" class="form-control brighter-form" placeholder="Username"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerUsername2" type="text" class="form-control brighter-form"
+                placeholder="Confirm username"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerPass1" type="password" class="form-control brighter-form" placeholder="Password"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerPass2" type="password" class="form-control brighter-form"
+                placeholder="Confirm password"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerFirstname" type="text" class="form-control brighter-form" placeholder="First name"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerLastname" type="text" class="form-control brighter-form" placeholder="Last name"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerAddress" type="text" class="form-control brighter-form" placeholder="Address"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerCity" type="text" class="form-control brighter-form" placeholder="City"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <div class="form-group">
+              <input id="registerState" type="text" class="form-control brighter-form" placeholder="State"
+                style="color:#fff; border-radius:50px; height:50px; background-color:transparent;">
+            </div>
+            <button id="registerBtn" type="button" class="btn btn-primary btn-block"
+              style="border-radius:50px; height:50px; background-color:#6ed3cf; border:none;">Create
+              account</button>
+          </form>
+
+
+        </div>
+
+        <br />
+        <p id="errorMsgReg" style="color:red;"></p>
+        <br />
+        <small style="color:#fff;">Already have an account?</small>
+        <a id="loginTooltipBtn">
+          <p style="font-size:14px; font-weight:bold; color:#6ed3cf">LOG IN NOW</p>
+        </a>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="home" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:left; line-height:54px; color:transparent;"></i>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Good Afternoon</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+      <div class="headershadow"
+        style="height:46px; color:#505050; padding-left:10px; padding-right:10px; font-size:20px; margin-top:54px; background-color:#fff; width:100%; position:fixed; z-index:99;">
+        <div class="row">
+          <div class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-pills" style="color:silver;"></i>
+          </div>
+          <div class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-search" style="color:silver;"></i>
+          </div>
+          <div class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-user-friends" style="color:silver;"></i>
+          </div>
+          <div class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-store" style="color:silver;"></i>
+          </div>
+          <div class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-cog" style="color:silver;"></i>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!--
+      <div class="card" style="background-color:transparent; padding:106px 0px 35px 20px; border:none;">
+        <div style="color:#fff;">
+          
+        </div>
+      </div>
+
+      <br />
+      -->
+
+
+
+      <div class="container-fluid" style="padding:0; padding-top:100px;">
+
+        <div class="card cardshadow">
+          <a id="cabinetCard" href="#" style="text-decoration:none; color:#000;">
+            <div class="card-body appcardbody" style="background-image:url(img/pills_new.jpg);">
+              <h2 class="card-title appcardheader">My cabinet</h2>
+              <p class="card-text appcardtext">View your personal list of medicines.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card cardshadow">
+          <a id="searchCard" href="#" style="text-decoration:none; color:#000;">
+            <div class="card-body appcardbody" style="background-image:url(img/info_new.jpg);">
+              <h2 class="card-title appcardheader">Medicine database</h2>
+              <p class="card-text appcardtext">Find, add, and review any medicine in our system.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card cardshadow">
+          <a id="groupCard" href="#" style="text-decoration:none; color:#000;">
+            <div class="card-body appcardbody" style="background-image:url(img/group_new.jpg);">
+              <h2 class="card-title appcardheader">My circle</h2>
+              <p class="card-text appcardtext">Add friends and family, chat with them, and set group notifications.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card cardshadow">
+          <a id="pharmacyCard" href="#" style="text-decoration:none; color:#000;">
+            <div class="card-body appcardbody" style="background-image:url(img/location_new.jpg);">
+              <h2 class="card-title appcardheader">Pharmacy locator</h2>
+              <p class="card-text appcardtext">Find pharmacies near you and get contact information.</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="card cardshadow">
+          <a id="settingsCard" href="#" style="text-decoration:none; color:#000;">
+            <div class="card-body appcardbody" style="background-image:url(img/pills_new.jpg);">
+              <h2 class="card-title appcardheader">Account settings</h2>
+              <p class="card-text appcardtext">Manage account details.</p>
+            </div>
+          </a>
+        </div>
+
+
+        <br />
+        <div style="margin:10px;">
+          <p class="text-muted" style="font-size:12px;">
+            DISCLAIMER: Do not rely on Medication Leaflet System to make decisions regarding medical
+            care. Always speak to your health provider about the risks and benefits of FDA-regulated
+            products. Information sourced from open.fda.gov.
+          </p>
+        </div>
+
+        <br /><br /><br />
+
+        <div id="userAccDetailsDiv">
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="cabinet" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">My Cabinet</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+      <br /><br /><br />
+
+
+      <!--
+      <div style="padding:5px; padding-top:10px;">
+
+
+
+
+        <div class='card cardshadow' style='margin-bottom:10px;'>
+          <div class='card-body'>
+            <div class='row'>
+              <div class='col'>
+                <h4 class='card-title'>Medicine</h4>
+                <h6 class='card-subtitle text-muted' style='font-size:14px;'>7:15 AM | MWF</h6>
+              </div>
+              <div class='col my-auto' style='text-align:right; font-size:20px;'>
+                <i class='fas fa-user-minus' style='display:inline; color:red;' onclick='removeFriend(data)'></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class='card' style="margin-bottom:10px;">
+          <div class='card-body'>
+
+            <label class="switch" style="float:right; margin-top:10px;">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+
+
+
+            <h4 class='card-title'>Ambien</h4>
+            <h2 class='card-title' style="display:inline;">7:15</h2>
+            <h6 class='card-title' style="display:inline;">&nbsp;AM</h6>
+            <br />
+            <small class='card-subtitle mb-2 text-muted'>Mon, Wed, Fri</small>
+
+          </div>
+        </div>
+
+
+
+        <div class='card' style="margin-bottom:10px;">
+          <div class='card-body'>
+
+            <h4 class='card-title'>Allegra</h4>
+            <h6 class='card-title text-muted' style="display:inline;">Set dosage time</h6>
+
+          </div>
+        </div>
+
+      </div>
+      -->
+
+
+
+      <div id="cabinetResponseDiv" class="container-fluid" style="padding:5px;"></div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <div id="search" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Medicine Lookup</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+      <div class="headershadow"
+        style="height:46px; color:#505050; font-size:20px; padding-right:20px; margin-top:54px; background-color:#fff; width:100%; position:fixed; z-index:99; display:table;">
+        <form>
+          <div class="input-group" style="margin:10px;">
+            <span class="input-group-prepend">
+              <div id="medicine_magnify" class="input-group-text bg-transparent"><i class="fa fa-search"
+                  style="color:#9068be"></i></div>
+            </span>
+            <input id="medSearchbar" class="form-control py-2 border-left-0 border" type="text"
+              placeholder="Search for a medicine...">
+          </div>
+        </form>
+      </div>
+
+
+
+      <br /><br /><br />
+
+      <div id="responseDiv" class="container-fluid" style="padding:5px; padding-top:50px;"></div>
+    </div>
+
+
+
+
+
+
+
+
+    <div id="details" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a id="returnBtn_details" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Details</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+
+      <div id="detailResponseDiv" style="padding:5px; padding-top:70px;">
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+    <div id="review" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a id="returnBtn_review" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-trash"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Review</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center container"
+        style="margin-bottom:10px; padding:5px; padding-top:100px; width:100%;">
+        <div class="card" style="width:100%;">
+          <div class="card-body">
+
+            <form>
+              <div class="form-group">
+                <label for="ratingRange">Rate your overall experience:</label>
+                <input id="ratingRange" type="range" class="custom-range" min="1" max="10">
+                <small class="text-muted" style="margin:0;">Poor</small>
+                <small class="text-muted" style="margin:0; float:right;">Great</small>
+              </div>
+              <hr />
+              <div class="form-group">
+                <label for="reviewTags">Side effects experienced (max 5):</label>
+                <input id="reviewTags" type="text">
+              </div>
+              <hr />
+              <div class="form-group">
+                <label for="reviewTextarea">Additional comments:</label>
+                <textarea id="reviewTextarea" class="form-control" rows="6" maxlength="1500"></textarea>
+              </div>
+              <hr />
+              <div class="form-group">
+                <label for="yearSelect">Birthdate (optional):</label>
+                <input id="yearSelect" type="date" class="form-control">
+              </div>
+              <hr />
+              <button id="reviewSubmitBtn" type="button" class="btn btn-primary btn-block"
+                style="border-radius:50px; height:50px; background-color:#9068be; border:none;">Post
+                review</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="review_all" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a id="returnBtn_review_all" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-trash"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">All Reviews</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+      <div id="reviewAllResponseDiv" style="padding:5px; padding-top:70px;">
+      </div>
+
+
+
+      <div id="submitReplyToReview_div" style="display:none;">
+        <div class="headershadow"
+          style="height:46px; color:#505050; font-size:20px; padding-right:20px; margin-top:54px; background-color:#fff; width:100%; position:fixed; bottom:0; z-index:99; display:table;">
+          <form>
+            <div class="input-group" style="margin:10px;">
+              <span class="input-group-prepend">
+                <div id="submitReplyToReview_btn" class="input-group-text bg-transparent"><i class="fa fa-paper-plane"
+                    style="color:#9068be"></i></div>
+              </span>
+              <input id="submitReplyToReview_text" class="form-control py-2 border-left-0 border" type="text"
+                placeholder="Write a reply...">
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="mednotification" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-trash"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p id="grouptab_title" style="display:table-cell; text-align:center; line-height:54px;">Set Notifications</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+
+
+      <div class="d-flex justify-content-center align-items-center container"
+        style="margin-bottom:10px; padding:5px; padding-top:100px; width:100%;">
+        <div class="card" style="width:100%;">
+          <div class="card-body">
+
+            <h4 id="medNotifName">Medicine</h4>
+            <hr />
+
+            <form style="font-size:18px;">
+              <h5>Days</h5>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day0"><input class="form-check-input" type="checkbox"
+                    value="" id="day0" style="display:none;">Sunday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day1"><input class="form-check-input" type="checkbox"
+                    value="" id="day1" style="display:none;">Monday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day2"><input class="form-check-input" type="checkbox"
+                    value="" id="day2" style="display:none;">Tuesday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day3"><input class="form-check-input" type="checkbox"
+                    value="" id="day3" style="display:none;">Wednesday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day4"><input class="form-check-input" type="checkbox"
+                    value="" id="day4" style="display:none;">Thursday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day5"><input class="form-check-input" type="checkbox"
+                    value="" id="day5" style="display:none;">Friday</label>
+              </div>
+              <div class="form-check">
+                <label style="color:silver; margin:0;" id="label_day6"><input class="form-check-input" type="checkbox"
+                    value="" id="day6" style="display:none;">Saturday</label>
+              </div>
+              <hr />
+
+              <h5>Times</h5>
+              <div class="col-10">
+                <input class="form-control" type="time" value="12:00:00" id="mednotiftime1" style="margin-bottom:5px;">
+                <input class="form-control" type="time" value="13:00:00" id="mednotiftime2"
+                  style="margin-bottom:5px; display:none;" disabled>
+                <input class="form-control" type="time" value="14:00:00" id="mednotiftime3"
+                  style="margin-bottom:5px; display:none;" disabled>
+                <input class="form-control" type="time" value="15:00:00" id="mednotiftime4"
+                  style="margin-bottom:5px; display:none;" disabled>
+                <input class="form-control" type="time" value="16:00:00" id="mednotiftime5"
+                  style="margin-bottom:15px; display:none;" disabled>
+              </div>
+              <button id="addTimesBtn" type="button" class="btn btn-primary btn-block"
+                style="border-radius:50px; height:50px; background-color:#9068be; border:none;">Add another
+                time</button>
+              <button id="removeTimesBtn" type="button" class="btn btn-primary btn-block"
+                style="border-radius:50px; height:50px; background-color:#9068be; border:none; display:none;">Delete a
+                time</button>
+              <hr />
+
+              <h5>Quantity</h5>
+              <div class="col-10">
+                <input class="form-control" type="number" value="1" min="0" max="10" id="mednotifamount">
+              </div>
+              <hr />
+
+              <button id="setNotifBtn" type="button" class="btn btn-primary btn-block"
+                style="border-radius:50px; height:50px; background-color:#9068be; border:none;">Set
+                notification</button>
+              <small id="medidForNotification" style='color:transparent; margin:0;'></small>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="groupnotif" class="hidden">
+
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p id="grouptab_title" style="display:table-cell; text-align:center; line-height:54px;">My Circle</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+      <div class="headershadow"
+        style="height:46px; color:#505050; padding-left:10px; padding-right:10px; font-size:20px; margin-top:54px; background-color:#fff; width:100%; position:fixed; z-index:99;">
+        <div class="row">
+          <div id="grouptab_message" class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-comments" style="color:silver;"></i>
+          </div>
+          <div id="grouptab_friends" class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-user-friends" style="color:silver;"></i>
+          </div>
+          <div id="grouptab_search" class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-search" style="color:silver;"></i>
+          </div>
+          <div id="grouptab_incoming" class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-inbox" style="color:silver;"></i>
+          </div>
+          <div id="grouptab_outgoing" class="col" style="text-align:center; font-size:20px; padding-top:8px;">
+            <i class="fas fa-paper-plane" style="color:silver;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div id="usersearchheader" class="headershadow hidden"
+        style="height:46px; color:#505050; font-size:20px; padding-right:20px; margin-top:100px; background-color:#fff; width:100%; position:fixed; z-index:99; display:table;">
+        <form>
+          <div class="input-group" style="margin:10px;">
+            <span class="input-group-prepend">
+              <div class="input-group-text bg-transparent"><i class="fa fa-search" style="color:#9068be"></i></div>
+            </span>
+            <input id="userSearchbar" class="form-control py-2 border-left-0 border" type="text"
+              placeholder="Search for a user">
+          </div>
+        </form>
+      </div>
+
+
+
+      <div id="userResponseDiv" class="container-fluid" style="padding:5px; padding-top:120px;"></div>
+      <!--
+      <div id="friendsResponseDiv" class="container-fluid" style="padding:5px;"></div>
+      <div id="requestsResponseDiv" class="container-fluid" style="padding:5px;"></div>
+      -->
+      <div id="userAccNum_group"></div>
+
+
+      <!--
+        <div class='card' style="margin-bottom:10px;">
+          <div class='card-body'>
+            <div class="row">
+              <div class="col">
+                <h4 class='card-title'>John</h4>
+                <h6 class='card-subtitle text-muted' style="font-size:14px;">This user requested to connect</h6>
+              </div>
+              <div class="col my-auto" style="text-align:right; font-size:20px;">
+                <i class="fas fa-user-plus" style="display:inline;"></i>
+                <p style="display:inline;">&nbsp;</p>
+                <i class="fas fa-user-minus" style="display:inline; color:red;"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        -->
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="chatroom" class="hidden">
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a id="returnBtn_chat" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p id="chat_friendname" style="display:table-cell; text-align:center; line-height:54px;">Instant Message</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+
+
+      <div id="grouptab_message_box" class="hidden">
+        <div class="headershadow"
+          style="height:46px; color:#505050; font-size:20px; padding-right:20px; margin-top:54px; background-color:#fff; width:100%; position:fixed; bottom:0; z-index:99; display:table;">
+          <form>
+            <div class="input-group" style="margin:10px;">
+              <span class="input-group-prepend">
+                <div id="grouptab_message_submit" class="input-group-text bg-transparent"><i class="fa fa-paper-plane"
+                    style="color:#9068be"></i></div>
+              </span>
+              <input id="grouptab_message_text" class="form-control py-2 border-left-0 border" type="text"
+                placeholder="Send a message...">
+            </div>
+          </form>
+        </div>
+      </div>
+
+
+
+      <div id="chatResponseDiv" class="container-fluid"
+        style="padding:5px; padding-top:100px; padding-bottom:60px; width:100%; height:800px; bottom:0; overflow-y:scroll;">
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <div id="pharmacies">
+      <!--<div class="sidebar pad2">Listing</div>-->
+      <div id="map">Map</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="accountsettings" class="hidden">
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Account Settings</p>
+        <i class="fas fa-arrow-left"
+          style="display:table-cell; text-align:right; line-height:54px; color:transparent;"></i>
+      </div>
+
+      <div class="container-fluid" style="padding:15px; padding-top:80px;">
+        <h6 class="text-muted" style="font-weight:bold;">ACCOUNT</h6>
+        <hr style="margin-top:0; border:none; height:2px; background-color:#868e96;" />
+        <p id="edit_account" style="font-size:20px;">Edit account</p>
+        <hr />
+        <p style="font-size:20px;">Get verified as an expert</p>
+        <hr />
+        <p style="font-size:20px;">Opt to share data</p>
+        <hr />
+        <p id="settings_logout" style="font-size:20px;">Log out</p>
+        <hr />
+        <p style="font-size:20px; color:red;">Delete account</p>
+        <br />
+        <h6 class="text-muted" style="font-weight:bold;">GENERAL</h6>
+        <hr style="margin-top:0; border:none; height:2px; background-color:#868e96;" />
+        <div>
+          <p style="font-size:20px; display:inline;">Night mode</p>
+          <i class="fas fa-moon" style="font-size:20px; display:inline;"></i>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div id="accountsettings_edit" class="hidden">
+      <div class="headershadow"
+        style="height:54px; color:#fff; font-size:20px; padding-left:20px; padding-right:20px; background-color:#9068be; width:100%; position:fixed; z-index:99; display:table;">
+        <a class="returnBtn" href="#" style="color:#fff; text-decoration:none;"><i class="fas fa-chevron-left"
+            style="display:table-cell; text-align:left; line-height:54px;"></i></a>
+        <p style="display:table-cell; text-align:center; line-height:54px;">Edit Account</p>
+        <i id="editaccount_save" class="fas fa-save"
+          style="display:table-cell; text-align:right; line-height:54px; color:#fff;"></i>
+      </div>
+
+
+      <div class="container-fluid" style="padding:15px; padding-top:80px;">
+
+        <div class="row">
+          <div class="col-4">
+            <span class="fa-stack fa-2x"
+              style="font-size:48px; position:relative; top:50%; left:50%; transform:translate(-50%,-50%);">
+              <i class="fas fa-circle fa-stack-2x" style="color:silver;"></i>
+              <i class="fas fa-camera fa-stack-1x" style="color:grey;"></i>
+            </span>
+          </div>
+          <div class="col-8">
+            <input id="editaccount_firstname" class="form-control" type="text" placeholder="First name..."
+              style="margin-bottom:15px;" />
+            <input id="editaccount_lastname" class="form-control" type="text" placeholder="Last name..." />
+          </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+          <div class="col">
+            <label for="editaccount_username">Username:</label>
+            <input id="editaccount_username" class="form-control" type="text" style="margin-bottom:15px;" />
+            <label for="editaccount_password">Password:</label>
+            <input id="editaccount_password" class="form-control" type="password" />
+          </div>
+        </div>
+
+        <hr />
+
+        <p class="text-muted" style="font-style:italic;">Blank fields will not affect your account details.</p>
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <!--
+    <div class="adFooter">
+      <br /><br />
+    </div>
+    -->
+
+
+  </div>
+
+
+
+  <!--
+  <br />
+
+  <div class="container">
+    <p style="font-size:10px; text-align:center; margin-bottom:5px;">
+      DISCLAIMER:
+    </p>
+    <p style="font-size:8px; text-align:center;">
+      Do not rely on Medication Leaflet System to make decisions regarding medical
+      care. Always speak to your health provider about the risks and benefits of FDA-regulated
+      products. Drug information sourced from rxlist.com.
+    </p>
+  </div>
+  -->
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript">
+    app.initialize();
+  </script>
+  <script src="bootstrap/js/jquery-3.3.1.min.js"></script>
+  <script src="bootstrap/js/popper.min.js"></script>
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script src="tagify/tagify.min.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/external.js"></script>
+  <script src="js/map.js"></script>
+</body>
+
+</html>

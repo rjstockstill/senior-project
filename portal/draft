@@ -1,0 +1,339 @@
+<?php include '../../db.php'; ?>
+
+<?php
+    session_start();
+?>
+
+<?php
+    # Set cookies
+    #$query = 'SELECT * FROM User WHERE '
+    $cookie_name = "username";
+    $cookie_val = "devuser";
+
+    #Set cookie for 15 minutes
+    setcookie($cookie_name, $cookie_val, time()+900);
+
+    if(!isset($_COOKIE[$cookie_name])){
+        echo 'Cookie ' . $cookie_name . ' is not set.';
+    }   else{
+        echo 'Cookie '. $cookie_name . ' is set.';
+    }
+
+?>
+<?php 
+    $query = 'SELECT * FROM User, Blocked';
+    $message = mysqli_query($connection, $query);
+
+    if(isset($_GET['action']) && isset($_GET['user_id'])){
+        if ($_GET['action'] == 'block'){
+            $user_id = $_GET['user_id'];
+           
+            
+           # $reason = $_GET['reason'];
+            
+           # $query = "INSERT into Blocked VALUES ($user_id, $reason)"
+            
+            $query = "UPDATE User SET status = 3 WHERE user_id= $user_id UNION INSERT INTO Blocked Values($user_id, $reason)";
+            
+            # $query = "DELETE from User WHERE user_id = $user_id";
+            
+            if(!mysqli_query($connection, $query)){
+                die(mysqli_error($connection));
+            }
+            else {
+                header("Location: index.php?success=User%20Removed");
+            }
+        }
+    }
+?>
+
+<?php 
+    $query = 'SELECT * FROM Medicine';
+    $medicine = mysqli_query($connection, $query);
+
+    if(isset($_GET['action']) && isset($_GET['med_id'])){
+        if ($_GET['action'] == 'delete'){
+            $med_id = $_GET['med_id'];
+            
+            $query = "DELETE from Medicines WHERE med_id = $med_id";
+            
+            if(!mysqli_query($connection, $query)){
+                die(mysqli_error($connection));
+            }
+            else {
+                header("Location: index.php?success=User%20Removed");
+            }
+        }
+    }
+?>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Administrator Portal</title>
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container-fluid">
+  
+            <!--Top navigation bar-->
+            <div class="nav">
+                <nav class="navbar navbar-expand-lg ">
+                   <a class="navbar-brand" href="#">Medication Leaflet System</a>
+                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                       <span class="navbar-toggler-icon"></span>
+                   </button>
+                   <div class="collapse navbar-collapse" id="navbarText">
+                       <ul class="navbar-nav mr-auto">
+                           <li class="nav-item">
+                               <a class="nav-link" href="index.html">Dashboard <span class="sr-only">(current)</span></a>
+                           </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="#">Settings</a>
+                           </li>
+                           <li class="nav-item">
+                               <a class="nav-link" href="#">Help</a>
+                           </li>
+                       </ul>
+                       <span class="navbar-text" id="adminName">Doe, John 012345</span>
+                   </div>
+                </nav>
+            </div>
+            
+            <!--Side navigation bar-->
+            <div class="side-nav">
+                <div class="sidenav">
+                    <a href="index.html">Overview</a>
+                    <a href="manageMeds.php" onclick="show()">Manage Medicine</a>
+                    <a href="manageUsers.html">Manage Users</a>
+                    <a href="manageReviews.html">Manage Reviews</a>
+                    <a href="confirmLicense.html">Confirm License</a>
+                </div>
+            </div>
+            <div class="main">
+                
+                
+                
+                
+                <!----Overview-->
+                <div id="overview" class="hiddenOverview">
+                    <!--Start table--->
+                    <table class="table table-hover medTable hiddenOverview">
+                        <thead>
+                            <tr>
+                                <th id="dateAlert">Date</th>
+                                <th id="timeAlert">Time</th>
+                                <th id="typeAlert">Type</th>
+                                <th id="titleAlert">Title</th>
+                                <th id="requstAlert">Requested By</th>
+                            </tr>
+                        </thead>
+                             <tbody>
+                          <tr>
+                              <?php while($row = mysqli_fetch_assoc($message)) : ?>
+                              <?php if ($row['status'] == 1){
+                                    $status = "Pending";
+                                } else if ($row['status'] == 2){
+                                    $status = "Active";
+                                } else if ($row['status'] == 3) {
+                                    $status = "Banned";
+                                } else {
+                                    $status = "Error! Check Code.";
+                                }
+                              ?>
+                              <th scope="row"><?php echo $row['time'];?></th>
+                              <td><?php echo $row['user_id'];?></td>
+                              <td><?php echo $row['username'];?></td>
+                              <td><?php echo $status;?></td>
+                              <td><?php echo $type;?></td>
+                              <td>
+                                  <a href="#"><i class="far fa-edit"></i>Edit</a>
+                                  <a href="index.php?action=block&user_id=<?php echo $row['user_id'];?>"><i class="fas fa-trash-alt"></i> Block</a>    
+                              </td>
+                            </tr>
+                        </tbody>
+                         endwhile; ?>
+                              
+                              
+                              
+                                    </table>
+                      
+                </div>
+                
+                <!-----Manage Users--->
+                <div class="manageUsers hiddenUsers hidden">
+                    <button id="add_user" type="button" class="button" ><i class="fas fa-plus"></i> Add User</button>
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                              <th scope="col">User Since</th>
+                              <th scope="col">ID</th>
+                              <th scope="col">Username</th>
+                              <th scope="col">Status</th>
+                              <th scope="col">Type</th>
+                              <th colspan="2" scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <?php while($row = mysqli_fetch_assoc($message)) : ?>
+                              <?php if ($row['type'] == 1){
+                                    $type = "User";
+                                } else if ($row['type'] == 2){
+                                    $type = "Administrator";
+                                } else if ($row['type'] == 3) {
+                                    $type = "Data Entry";
+                                } else {
+                                    $type = "Error! Check Code.";
+                                }
+                              ?>
+                               <?php if ($row['status'] == 1){
+                                    $status = "Pending";
+                                } else if ($row['status'] == 2){
+                                    $status = "Active";
+                                } else if ($row['status'] == 3) {
+                                    $status = "Banned";
+                                } else {
+                                    $status = "Error! Check Code.";
+                                }
+                              ?>
+                              <th scope="row"><?php echo $row['created'];?></th>
+                              <td><?php echo $row['user_id'];?></td>
+                              <td><?php echo $row['username'];?></td>
+                              <td><?php echo $status;?></td>
+                              <td><?php echo $type;?></td>
+                              <td>
+                                  <a href="#"><i class="far fa-edit"></i>Edit</a>
+                                  <a href="index.php?action=block&user_id=<?php echo $row['user_id'];?>"><i class="fas fa-trash-alt"></i> Block</a>    
+                              </td>
+                            </tr>
+                        </tbody>
+                       endwhile; ?>
+                                    </table>
+                    
+                </div>
+                    
+                    <!------Manage Medicine------>
+                   
+                <div class="manageMedicine hiddenMedicine hidden">
+                    <button id="add_med" type="button" class="button" onclick="show()" ><i class="fas fa-plus"></i> Add Medicine</button>
+                    <table class="table table-hover">
+                        <thead>
+                          <tr>
+                              <th scope="col">ID</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Generic Name</th>
+                              <th scope="col">Status</th>
+                              <th colspan="2" scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                              <?php while($row = mysqli_fetch_assoc($medicine)) : ?>
+                              <td><?php echo $row['med_id'];?></td>
+                              <td><?php echo $row['brand_name'];?></td>
+                              <td><?php echo $row['gen_name'];?></td>
+                              <td><?php echo $row['status'];?></td>
+                              
+                              <td>
+                                  <a href="#"><i class="far fa-edit"></i>Edit</a>
+                                  <a href="index.php?action=delete&med_id=<?php echo $row['user_id'];?>"><i class="fas fa-trash-alt"></i> Delete</a>    
+                              </td>
+                            </tr>
+                        </tbody>
+                        endwhile; ?>
+                                    </table>
+                    
+                </div>
+                    
+                    <!---------Add User Form------->
+                
+                <div class="addmedicine_form">
+                    <div class="form-wrap">
+                
+                <form class="form-horizontal" role="form">
+                    <fieldset>
+                        <legend>Add Medicine</legend>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-8">
+                                <div class="form-group">    
+                                    <div class="form-line">
+                                        <label for="name" class="control-label">Name of Medicine</label>
+                                        <div class='input-group'>
+                                            <input id="nameofMed" name="nameOfMedicine" type="text" class="form-control input-md" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                                <div class="form-group">    
+                                    <div class="form-line">
+                                        <label for="dosage" class="control-label">Dosage</label>
+                                        <input id="dosageNum" name="dosage" type=number placeholder="milligrams" class="form-control input-md" required="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 col-sm-6 col-md-8">
+                                <div class="form-group">    
+                                    <div class="form-line">
+                                        <label for="RXNum" class="control-label">RX Number</label>
+                                        <div class='input-group'>
+                                            <input id="rxNum" name="rxNum" type="text" class="form-control input-md" placeholder="XXXXXXX-XXXXX" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-2">
+                                <div class="form-group">    
+                                    <div class="form-line">
+                                        <label for="food" class="control-label">Taken With A Meal?</label>
+                                        <select id="foodValidation" name="food" class="form-control">
+                                            <option value="1">Select</option>
+                                            <option value="1">Yes</option>
+                                            <option value="2">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-10">
+                                <div class="form-group">    
+                                    <div class="form-line">
+                                        <label for="name" class="control-label">Messages</label>
+                                        <div class="input-group">
+                                            <textarea class="form-control" id="messageForMed" name="message"></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-default submit-btn addMeds">Submit</button>
+                                        <button type="reset" class="btn btn-default reset-btn addMeds">Reset</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                </div>
+            </div>
+                    
+                    <div class="block-modal">
+                        <div class="block-modal-content">
+                            hello
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        <script type="text/javascript">
+            function show() {
+  var x = document.getElementById("addmedicine_form");
+  x.style.visibility = "hidden";
+}
+        </script>    
+    </body>
+</html>

@@ -1,0 +1,360 @@
+<html>
+    <head>
+        <meta charset="UTD-8">
+        <meta name = "viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        
+        <title>Accounts | MLS</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h3>Medication Leaflet System</h3>
+                <hr>
+                <h4>Register User</h4>
+            </div>
+            
+            <div class="register-container-left" id="msg">
+            
+            <form class="register-patient" id="registrationForm">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <select id="accountType" class="form-control">
+                            <option required>Account Type</option>
+                            <option value="doctor" id="doctor">Doctor</option>
+                            <option value="regular" id="reg">Regular Account</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-5">
+                        <input type="email" class="form-control" id="email" placeholder="E-Mail" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <input type=password class="form-control" id="pw" placeholder="password" required></div>
+                    </div>
+                
+                <div class="form-row">
+                    <div class="form-group col-xs-8 col-sm-6">
+                      
+                      <input type="text" class="form-control" id="firstName" placeholder="First Name" required>
+                    </div>
+                    
+                    <div class="form-group col-xs-8 col-sm-6">
+                      <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                    </div>
+                  </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <select id="gender" class="form-control">
+                            <option required>Gender</option>
+                            <option value="Male" id="male">Male</option>
+                            <option value="Female" id="reg">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <select name="selectMonth" id="birthMonth" class="form-control">
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April<option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>  
+                        </select>
+                </div>
+                
+                    
+                    <div class="form-group col-md-1">
+                        <select name= "selectMonth" id="birthDay" class="form-control">
+                            <option value="1">1</option>       
+                            <option value="2">2</option>       
+                            <option value="3">3</option>       
+                            <option value="4">4</option>       
+                            <option value="5">5</option>       
+                            <option value="6">6</option>       
+                            <option value="7">7</option>       
+                            <option value="8">8</option>       
+                            <option value="9">9</option>       
+                            <option value="10">10</option>       
+                            <option value="11">11</option>       
+                            <option value="12">12</option>       
+                            <option value="13">13</option>       
+                            <option value="14">14</option>       
+                            <option value="15">15</option>       
+                            <option value="16">16</option>       
+                            <option value="17">17</option>       
+                            <option value="18">18</option>       
+                            <option value="19">19</option>       
+                            <option value="20">20</option>       
+                            <option value="21">21</option>       
+                            <option value="22">22</option>       
+                            <option value="23">23</option>       
+                            <option value="24">24</option>       
+                            <option value="25">25</option>       
+                            <option value="26">26</option>       
+                            <option value="27">27</option>       
+                            <option value="28">28</option>       
+                            <option value="29">29</option>       
+                            <option value="30">30</option>       
+                            <option value="31">31</option>  
+                        </select>
+                </div>
+                <div class="form-group col-md-2">
+                    <select name="birthYear" class="form-control" id="birthYear"> 
+                            <option>1913</option>
+                            <option>1914</option>
+                            <option>1915</option>
+                            <option>1916</option>
+                            <option>1917</option>
+                            <option>1918</option>
+                            <option>1919</option>
+                            <option>1920</option>
+                            <option>1921</option>
+                            <option>1922</option>       
+                            <option>1923</option>       
+                            <option>1924</option>       
+                            <option>1925</option>       
+                            <option>1926</option>       
+                            <option>1927</option>       
+                            <option>1928</option>       
+                            <option>1929</option>       
+                            <option>1930</option>       
+                            <option>1931</option>     
+                            <option>1932</option>
+                            <option>1933</option>
+                            <option>1934</option>
+                            <option>1935</option>
+                            <option>1936</option>
+                            <option>1937</option>
+                            <option>1938</option>
+                            <option>1939</option>
+                            <option>1940</option>
+                            <option>1941</option>       
+                            <option>1942</option>       
+                            <option>1943</option>
+                            <option>1944</option>
+                            <option>1945</option>
+                            <option>1946</option>
+                            <option>1947</option>
+                            <option>1948</option>
+                            <option>1949</option>
+                            <option>1950</option>
+                            <option>1951</option>
+                            <option>1952</option>       
+                            <option>1953</option>       
+                            <option>1954</option>       
+                            <option>1955</option>       
+                            <option>1956</option>       
+                            <option>1957</option>       
+                            <option>1958</option>       
+                            <option>1959</option>       
+                            <option>1960</option>       
+                            <option>1961</option>     
+                            <option>1962</option>
+                            <option>1963</option>
+                            <option>1964</option>
+                            <option>1965</option>
+                            <option>1966</option>
+                            <option>1967</option>
+                            <option>1968</option>
+                            <option>1969</option>
+                            <option>1970</option>
+                            <option>1971</option>       
+                            <option>1972</option>       
+                            <option>1973</option>       
+                            <option>1974</option>       
+                            <option>1975</option>       
+                            <option>1976</option>       
+                            <option>1977</option>       
+                            <option>1978</option>       
+                            <option>1979</option>       
+                            <option>1980</option>       
+                            <option>1981</option>
+                            <option>1982</option>
+                            <option>1983</option>
+                            <option>1984</option>
+                            <option>1985</option>
+                            <option>1986</option>
+                            <option>1987</option>
+                            <option>1988</option>
+                            <option>1989</option>
+                            <option>1990</option>       
+                            <option>1991</option>       
+                            <option>1992</option>       
+                            <option>1993</option>       
+                            <option>1994</option>       
+                            <option>1995</option>       
+                            <option>1996</option>       
+                            <option>1997</option>       
+                            <option>1998</option>       
+                            <option>1999</option>     
+                            <option>2000</option>
+                            <option>2001</option>
+                            <option>2002</option>
+                            <option>2003</option>
+                            <option>2004</option>
+                            <option>2005</option>
+                            <option>2006</option>
+                            <option>2007</option>
+                            <option>2008</option>
+                            <option>2009</option>       
+                            <option>2010</option>       
+                            <option>2011</option>       
+                            <option>2012</option>       
+                            <option>2013</option>       
+                            <option>2014</option>       
+                            <option>2015</option>       
+                            <option>2016</option>       
+                            <option>2017</option>       
+                            <option>2018</option>       
+                        </select> 
+                    </div>
+                    
+                    <div class="form-group col-md-2">
+                    <input type="text" class="form-control" id="weight" placeholder="Weight">
+                  </div>
+                    <div class="form-group col-md-1">
+                        <select name= "selectMonth" id="weightType" class="form-control">
+                            <option value="lbs">lbs</option>
+                            <option value="kg">kg</option>
+                    </select>
+                    </div>
+                    
+                
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Address 1" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Address 2">
+                  </div>
+                    
+              
+                    <div class="form-group col-md-4">
+                      <input type="text" class="form-control" id="inputCity" placeholder="City" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <select id="inputState" class="form-control" required>
+                        <option selected>State</option>
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                      <input type="text" class="form-control" id="inputZip" placeholder="ZIP" required>
+                    </div>
+                  </div>
+                <div class="form-row">
+                    
+                    
+                </div>
+                <div class="form-row">
+                    <div class="form-group button register">
+                    <button type="submit" class="btn button">Register User</button>
+                  </div>
+                    <div class="form-group button register">
+                    <button type="reset" class="btn button">Reset</button>
+                  </div>
+                </div>
+                  
+                  </form>
+            </div>
+        
+        <div class="register-container-right">
+            <img src="QR_code_for_mobile_English_Wikipedia.svg.png" width="150px" height="150px" alt="QR Code for Medication Leaflet System">
+            <img src="googlePlayLogo.png" width="150px" height="50px" alt="Get it on Google Play">
+        </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        
+        function register(e){
+            
+            e.preventDefault();
+            
+            var accountType = document.getElementById('accountType').value;
+            var email = document.getElementById('email').value;
+            var pw = document.getElementById('pw').value;
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var birthMonth = document.getElementById('birthMonth').value;
+            var birthDay = document.getElementById('birthDay').value;
+            var birthYear = document.getElementById('birthYear').value;
+            var weightType = document.getElementById('weightType').value;
+            var address = document.getElementById('inputAddress').value;
+            var address2 = document.getElementById('inputAddress2').value;
+            var city = document.getElementById('inputCity').value;
+            var state = document.getElementById('inputState').value;
+            var zip = document.getElementById('inputZip').value;
+            
+            var confirmation = document.getElementById('msg').value;
+            
+            msg.innerHTML = accountType + "\nName: " + firstName + "\nEmail:" + email + " " + pw + " " + lastName + " " + birthDay + " " + birthMonth + " " + birthYear + " " + weightType + " " + address + "  " + address2 + " " + city + " " + state + " " + zip;
+            
+        }
+        
+        document.getElementById('registrationForm').addEventListener('submit', register, false);
+        
+    </script>
+</html>

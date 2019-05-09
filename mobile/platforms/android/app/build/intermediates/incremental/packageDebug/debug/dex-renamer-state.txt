@@ -1,0 +1,4 @@
+#Tue Apr 30 13:46:08 CDT 2019
+base.0=C\:\\Users\\clock\\Desktop\\MLS_new\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

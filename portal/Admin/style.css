@@ -1,0 +1,276 @@
+body{
+    
+	width: 100%;
+    margin: 80px auto;
+    background-image: url(images/background.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: 'Roboto Condensed', sans-serif;
+    
+}
+
+.fixed{
+    width: 420px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    height: 300px;
+    text-align: center;
+    font-size: 40px;
+    color: white;
+    padding-top: 250px;
+}
+
+.manage_admin{
+    position: fixed;
+    float: left;
+    left: 130px !important;
+    background-color: #646464;
+    margin-right: 2px;
+}
+
+.reports{
+    position: fixed;
+    left: 665px !important;
+    float: right;  
+    background-color: #646464;
+    margin-left: 2px;
+}
+
+input{
+    padding: 10px;
+    width: 300px;
+}
+
+/* The Overlay (background) */
+.overlay {
+    font-size: 30px;
+    height: 548px;
+    width: 0;
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 83px;
+    background-color: rgb(0,0,0); /* Black fallback color */
+    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
+}
+
+.overlay-data{
+    left: 210px;
+}
+.overlay-reports{
+    left: 670px;
+}
+
+/* Position the content inside the overlay */
+.overlay-content {
+    position: relative;
+    top: 25%; /* 25% from the top */
+    width: 100%;
+    text-align: center; /* Centered text/links */
+    margin-top: 70px; /* 30px top margin to avoid conflict with the close button on smaller screens */
+}
+
+/* The navigation links inside the overlay */
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  color: #818181;
+  display: block; /* Display block instead of inline */
+  transition: 0.3s; /* Transition effects on hover (color) */
+}
+
+/* When you mouse over the navigation links, change their color */
+.overlay a:hover, .overlay a:focus {
+  color: #f1f1f1;
+}
+
+/* Position the close button (top right corner) */
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+}
+
+/* When the height of the screen is less than 450 pixels, change the font-size of the links and position the close button again, so they don't overlap */
+@media screen and (max-height: 450px) {
+  .overlay a {font-size: 20px}
+  .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+.manageUsers{
+    text-align: center;
+    
+}
+
+header{
+    font: 40px 'Libre Franklin', sans-serif !important;
+    width: 100% !important;
+    position: fixed;
+    left: 0 !important;
+    top: 25px;
+}
+
+.nav{
+    width: 100%;
+    background-color: #000000;
+    color: #ffffff;
+    opacity: 0.8;
+    top: 0;
+    position: fixed;
+    left: 0;
+    height: 40px;
+   
+}
+
+.logout-button{
+    position: fixed;
+    top: 5px;
+    right: 30px;
+}
+
+.logout-text{
+    position: fixed;
+    top: 5px;
+    font-size: 20px;
+    right: 70px;
+}
+
+.navbar-text{
+    position: fixed;
+    top: 5px;
+    font-size: 20px;
+    left: 5px;
+}
+
+.left-reports{
+
+    position: fixed;
+    top: 155px;
+    left: 90px;
+    width: 400px;
+    float: left !important;
+    margin-right: 2px;
+    
+}
+
+.right-reports{
+    position: fixed;
+    top: 155px;
+    left: 520px;
+    height: 500px;
+    float: right;
+    width: 750px;
+    
+}
+
+.username{
+    position: fixed;
+    top: 8px;
+    right: 150px;
+    text-align: right;
+
+}
+
+form.registerAccounts{
+    margin-left: 50px;
+    margin-right: 50px;
+    padding-top: 45px;
+}
+
+.form-wrapper{
+    position: absolute;
+    left: 35%;
+    width: 450px;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px grey;
+}
+
+.main{
+    position: absolute;
+    width: 85%;
+    left: 25px;
+    
+}
+
+.buttons{
+    padding-top: 10px;
+    display: inline-block;
+}
+
+label.radio{
+    margin-left: -280px;
+}
+input[type=submit], input[type=reset] {
+ 
+    width: 160px;
+    
+}
+
+input[type=submit]:hover, input[type=reset]:hover{
+    background-color: #424242;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: #424242;
+}
+
+label{
+    margin-right: 10px;
+}
+
+.viewUserDetail{
+    border: 1px solid black;
+    width: 450px;
+    float: right;
+    left: 20px;
+    margin: 10px 20px;
+    padding: 10px;
+    background-color: #ffffff;
+    box-shadow: 10px 10px grey;
+    
+    
+}
+
+
+
+.manageAccounts{
+    
+    width: 550px;
+    float: left;
+    margin: 10px 20px;
+}
+
+.manageAccounts a{
+    color: #646464;
+}
+
+.manageAccounts a:hover{
+    color: #000000;
+}
+
+.clearReportButton{
+    
+}
+
+input.checkbox{
+    width: 30px;
+    display: inline;
+}
+
+.submitReportButton{
+    position: relative;
+    left: 50px;
+    margin-left: 50px;
+}

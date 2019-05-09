@@ -1,0 +1,360 @@
+body {
+    
+	width: fit-content;
+	margin-left: auto;
+    margin-right: auto;
+	color:#646464;
+	background:#c8c8c8;
+	background:url(https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260) fixed;
+	background-size: cover;
+	font:600 16px/18px 'Open Sans',sans-serif;
+  
+}
+
+.login-wrap{
+	width: 100%;
+    height: 500px;
+	margin:auto;
+	max-width:510px;
+	position:relative;
+	background: white no-repeat center;
+	background-size: cover;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:90px 70px 50px 90px;
+}
+
+.login-form{
+	min-height:345px;
+	position:relative;
+	-webkit-perspective:1000px;
+	        perspective:1000px;
+	-webkit-transform-style:preserve-3d;
+	        transform-style:preserve-3d;
+}
+.login-form {
+	margin-bottom:15px;
+}
+
+.home-button{
+    padding:15px 65px;
+	
+}
+
+.home-button:hover{
+    font-size: 25px;
+}
+
+.button{
+    border-radius:25px;
+    background-color: #646464;
+    color: #ffffff;
+}
+
+.login-btn {
+    display: block;
+    position: relative;
+    text-align:center;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding-left: 80px;
+    width: 50%;
+}
+
+.login-form .button{
+    margin-top: 20px;
+    margin-left: 25px;
+	border:none;
+    padding: 25px 60px;
+    
+   
+}
+
+.logo {
+    margin: auto 100px auto 130px;
+}
+
+.center {
+    margin-top:50px;   
+}
+
+
+.home-logo {
+    display: block;
+    margin: 0 auto;
+    padding: 0 auto;
+}
+
+.site-content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
+.registration-form{
+    font-size: 6px;
+    font-family: monospace;
+}
+
+
+
+.form-wrap{
+	width: 85%;
+    height: 400px;
+    padding-left: 40px;
+    padding-right: 0px;
+	margin:10px auto 10px auto;
+	position:relative;
+	background: white no-repeat center;
+	background-size: cover;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+
+.user-wrap{
+    margin: auto;
+    padding-left: 300px;
+}
+
+.user-wrap .button{
+    margin-left: 17px;
+    margin-top: 200px;
+    padding: 40px 70px 40px 70px;
+    
+}
+.backButton img{
+    padding-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    
+}
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+}
+.modal-content {
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%; 
+}
+
+.button-login{
+    text-align: center;
+    margin: auto;
+    padding-left: 120px;
+}
+
+.register-patient{
+  
+   
+    width: 700px;
+}
+
+.radio-inline{
+    padding-right: 0px;
+}
+.lbl{
+    margin-left: -20px;
+    margin-right: 5px;
+}
+
+.register-container-left{
+    width: 75%;
+    left: auto;
+}
+.register-container-right{
+    position: fixed;
+    top: 150px;
+    left: 850px;
+}
+
+.register{
+    margin: 10px 20px 10px 0px;
+}
+
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+  color: #fff;
+  background-color: #428bca;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.space{
+    position: absolute;
+    top: 85px;
+    width: 95%;
+    
+}
+a{
+    color: #646464;
+}
+
+a:hover{
+    color: #ffffff;
+}
+
+a:active{
+    background-color: #646464;
+    color: white;
+}
+
+.pass_show{position: relative} 
+
+.pass_show .ptxt { 
+
+position: absolute; 
+
+top: 50%; 
+
+right: 10px; 
+
+z-index: 1; 
+
+
+margin-top: -10px; 
+
+cursor: pointer; 
+
+transition: .3s ease all; 
+
+} 
+
+.settings-container{
+    position: absolute;
+    top: 150px;
+    padding-left: 10px;
+    width: 700px;
+}
+
+.navbar-workaround{
+    height: 20px;
+}
+
+.navbar-brand{
+    top: 0px;
+    left: 10px;
+    position: absolute;
+}
+
+.workaround{
+    left: 40px;
+    position: absolute;
+}
+
+
+.se-wa{
+    left: 800px;
+    top: 7px;
+    position: absolute;
+    
+}
+
+.reviews{
+    width: 50%;
+    padding: 0px 20px 0px 20px;
+    margin-left: auto;
+    margin-right: auto;
+  
+}
+
+.modal{
+    color: #646464;
+}
+
+#doclicense { display : none; } 

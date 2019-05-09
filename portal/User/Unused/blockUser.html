@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <meta charset="UTD-8">
+        <meta name = "viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css" type="text/css">
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        
+        <title>Accounts | MLS</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h3>Medication Leaflet System</h3>
+                <hr>
+                <h4>Block User</h4>
+            </div>
+            
+            <div class="register-container-left" id="msg">
+            
+            <form class="block-user" id="blockForm">
+               
+                <div class="form-row">
+                    <div class="form-group col-xs-8 col-sm-6">
+                      
+                      <input type="text" class="form-control" id="firstName" placeholder="ID" required>
+                    </div>
+                    
+                    <div class="form-group col-xs-8 col-sm-6">
+                      <input type="text" class="form-control" id="lastName" placeholder="Last Name" required>
+                    </div>
+                  </div>
+               
+                <div class="form-row">
+                    
+                    
+                </div>
+                <div class="form-row">
+                    <div class="form-group button block">
+                    <button type="submit" class="btn button">Block User</button>
+                  </div>
+                    <div class="form-group button register">
+                    <button type="reset" class="btn button">Reset</button>
+                  </div>
+                </div>
+                  
+                  </form>
+            </div>
+        
+        <div class="register-container-right">
+            <img src="QR_code_for_mobile_English_Wikipedia.svg.png" width="150px" height="150px" alt="QR Code for Medication Leaflet System">
+            <img src="googlePlayLogo.png" width="150px" height="50px" alt="Get it on Google Play">
+        </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        
+        function block(e){
+            
+            e.preventDefault();
+            
+            var accountType = document.getElementById('accountType').value;
+            var email = document.getElementById('email').value;
+            var pw = document.getElementById('pw').value;
+            var firstName = document.getElementById('firstName').value;
+            var lastName = document.getElementById('lastName').value;
+            var birthMonth = document.getElementById('birthMonth').value;
+            var birthDay = document.getElementById('birthDay').value;
+            var birthYear = document.getElementById('birthYear').value;
+            var weightType = document.getElementById('weightType').value;
+            var address = document.getElementById('inputAddress').value;
+            var address2 = document.getElementById('inputAddress2').value;
+            var city = document.getElementById('inputCity').value;
+            var state = document.getElementById('inputState').value;
+            var zip = document.getElementById('inputZip').value;
+            
+            var confirmation = document.getElementById('msg').value;
+            
+            msg.innerHTML = accountType + "\nName: " + firstName + "\nEmail:" + email + " " + pw + " " + lastName + " " + birthDay + " " + birthMonth + " " + birthYear + " " + weightType + " " + address + "  " + address2 + " " + city + " " + state + " " + zip;
+            
+        }
+        
+        document.getElementById('registrationForm').addEventListener('submit', register, false);
+        
+    </script>
+</html>

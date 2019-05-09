@@ -1,0 +1,165 @@
+@font-face {
+  font-family: 'OpenSans';
+  src: url('OpenSans-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src: url('OpenSans-Bold.ttf');
+}
+
+body {
+  font-family: 'OpenSans';
+  background-color: #e3e3e3;
+}
+
+.boldfont {
+  font-family: 'OpenSansBold';
+}
+
+.headershadow {
+  box-shadow:0 2px 3px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.19);
+}
+
+.cardshadow {
+  /*margin-bottom:10px;*/
+  border-radius:0;
+  border:none;
+  box-shadow:0 2px 3px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.19);
+}
+
+.cardshadowmed {
+  margin-bottom:10px;
+  border-radius:0;
+  border:none;
+  box-shadow:0 2px 3px 0 rgba(0,0,0,0.2), 0 3px 5px 0 rgba(0,0,0,0.19);
+}
+
+.appcardbody {
+  padding:140px 20px 5px 20px;
+  background-size:cover;
+}
+
+.appcardheader {
+  color:#fff;
+  margin-bottom:5px;
+}
+
+.appcardtext {
+  color:#fff;
+  margin-top:0;
+  margin-bottom:5px;
+  font-size:14px;
+}
+
+.cardfont {
+  font-size: 20px;
+}
+
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+form .brighter-form::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+form .brighter-form::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+form .brighter-form:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+form .brighter-form:placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+
+
+
+
+
+.adFooter {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+  background-color: blue;
+  text-align: center;
+  background-image: url(../img/ad/ad1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+
+
+
+
+
+
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #9068be;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #9068be;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
